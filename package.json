@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "react-hook-form": "^7.69.0"
+  }
+}

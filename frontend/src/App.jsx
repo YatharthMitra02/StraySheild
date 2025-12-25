@@ -8,7 +8,8 @@ function App() {
 
   return (
     <>
-      <div style={{ backgroundColor: 'white', fontSize: '40px' }}>hello this is yatharth mitra</div>
+      
+      <div>hello world this the mega project straysheild</div>
     </>
   )
 }

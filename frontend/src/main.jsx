@@ -7,6 +7,8 @@ import Layout from './components/Layout.jsx'
 import Home from './components/Home.jsx'
 import REPORT from './REPORT.JSX'
 import Reels from './components/Reels.jsx'
+import { store } from './store/store.js'
+import {Provider} from 'react-redux'
 
 
 
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
 
-  <StrictMode>
+  <Provider store = {store}>
    <RouterProvider router={router} />
-  </StrictMode>,
+  </Provider>,
 )
