@@ -23,7 +23,11 @@ const ngoSchema = new mongoose.Schema({
     contactNo:{
         type:Number,
         required:true
-    }
+    },
+    serviceIn:{
+        type:String,
+        required:true
+   }
 },{timestamps:true})
 const Ngo = mongoose.model("Ngo", ngoSchema);
 export default Ngo;
