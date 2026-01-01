@@ -5,8 +5,7 @@ const reportSchema = new mongoose.reportASchema({
         ref:"User",
         required:true
     },
-    file:
-    {
+    file:{
         type :String,
         required : true
     },

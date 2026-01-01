@@ -4,10 +4,7 @@ const connectDB = async () => {
   try {
     const mongodbInstance = await mongoose.connect(
       `${process.env.MONGODB_URI}/strayShield`,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
+     
     );
     console.log("Database connected successfully at port 3000");
     console.log(

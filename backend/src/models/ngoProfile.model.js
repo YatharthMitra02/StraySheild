@@ -16,7 +16,7 @@ const ngoSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    ownerName:{
+    directorName:{
         type:String,
         required:true
     },
