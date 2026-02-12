@@ -45,11 +45,14 @@ const Header = () => {
 
   ]
   return (
-   <header className='w-full'>
+   <header className='w-[95%] bg-white sticky top-0 z-50 rounded-md p-3 mt-3 mx-auto'>
     <Container>
     <nav className = "flex">
-      <div>
-        <Link to="/">LOGO DALNA HAI YAHA </Link>
+      <div className='flex gap-7'>
+        <Link to="/">
+        <img className='h-10 w-10' src="https://cdn-icons-png.freepik.com/512/9848/9848829.png" alt="" />
+         </Link>
+         <h2 className='font-bold text-2xl text-[#f5b905ce]'>StrySheild</h2>
       </div>
       <div className = 'flex gap-6 ml-auto'>
         <ul className='flex gap-6 mx-auto hover:cursor-pointer'>
@@ -62,7 +65,7 @@ const Header = () => {
             ): null
           ))}
           {isActive && (
-            <li>
+            <li className='hover:text-blue-500 hover:underline transition text-xl no-underline'>
               <Logoutbtn/>
             </li>
           )}

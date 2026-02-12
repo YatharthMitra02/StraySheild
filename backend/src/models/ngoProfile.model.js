@@ -27,6 +27,10 @@ const ngoSchema = new mongoose.Schema({
     serviceIn:{
         type:String,
         required:true
+   },
+   membersCount:{
+    type:Number,
+    required:true
    }
 },{timestamps:true})
 const Ngo = mongoose.model("Ngo", ngoSchema);

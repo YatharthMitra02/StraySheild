@@ -9,6 +9,9 @@ import REPORT from './REPORT.JSX'
 import Reels from './components/Reels.jsx'
 import { store } from './store/store.js'
 import {Provider} from 'react-redux'
+import Login from './components/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import NgoForm from './pages/NgoForm.jsx'
 
 
 
@@ -21,6 +24,20 @@ const router = createBrowserRouter([
           path:"",
           element:<Home/>
           
+        },
+        {
+          path:"/login",
+          element:<Login/>,
+        },
+         
+        {
+          path: "/signup",
+          element :<Signup/>
+        },
+        {
+          path: "/ngoform",
+          element:<NgoForm/>
+
         },
         {
           path:"/report",
