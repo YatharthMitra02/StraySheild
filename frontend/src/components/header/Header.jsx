@@ -1,5 +1,5 @@
 import React from 'react'
-import Container from '../container/container'
+import Container from '../container/Container'
 import { Link} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import Logoutbtn from './Logoutbtn';
@@ -50,7 +50,7 @@ const Header = () => {
     <nav className = "flex">
       <div className='flex gap-7'>
         <Link to="/">
-        <img className='h-10 w-10' src="https://cdn-icons-png.freepik.com/512/9848/9848829.png" alt="" />
+        <img className='h-8 w-8' src="https://cdn-icons-png.freepik.com/512/9848/9848829.png" alt="" />
          </Link>
          <h2 className='font-bold text-2xl text-[#f5b905ce]'>StrySheild</h2>
       </div>
