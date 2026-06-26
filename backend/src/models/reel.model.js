@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-impot
+
 
 const reelSchema = new mongoose.Schema({
     uploadedBy:{
@@ -7,7 +7,7 @@ const reelSchema = new mongoose.Schema({
         ref:"USER"
     },
     reelsURL:{
-        typer: String,
+        type: String,
         required: true
     },
     caption:{
@@ -15,3 +15,5 @@ const reelSchema = new mongoose.Schema({
         required : true
     }
 },{timestamps : true})
+const Reel = mongoose.model("Reel", reelSchema);
+export default Reel;

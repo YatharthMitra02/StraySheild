@@ -10,7 +10,6 @@ const reportSchema = new mongoose.Schema({
   images: [
     {
       type: String,
-      required: true
     }
   ],
 
@@ -25,8 +24,9 @@ const reportSchema = new mongoose.Schema({
   },
 
   location: {
-    latitude: Number,
-    longitude: Number
+    type: String,
+    default:'Point', // points -> that this array is a single location in the map ( a point in the map)
+    coordinates:[Number] // standard GeoJSON format for storing the lon and lat 
   },
 
   caseType: {
@@ -45,8 +45,14 @@ const reportSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  status:{
+    type:String,
+    enum: ['open', 'In_progress','resolved'],
+    default:'open'
+  }
 
 }, { timestamps: true });
+reportSchema.index({ location: '2dsphere' });// activates the mongodb geospatial functionality 
 
 const Report = mongoose.model("Report", reportSchema);
 export default Report;

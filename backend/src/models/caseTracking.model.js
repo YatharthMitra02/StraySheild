@@ -1,14 +1,21 @@
 import mongoose from "mongoose";
 
 const caseSchema = new mongoose.Schema({
-    reportedBy:{
+    report:{
+        type:Mongoose.Schema.Types.ObjectId,
+        ref:"Report",
+        required:true
+    },
+    claimedBy:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "USER"
     },
     status:{
         type:String,
-        enum: ['PENDING','ACCEPTED','PROGRESS', 'RESCUED'],
+        enum: ['PENDING','ACCEPTED','IN_PROGRESS', 'RESCUED'],
         required:true
     }
     
 },{timestamps:true})
+const CaseTracking = mongoose.model("CaseTracking", caseSchema);
+export default caseTracking;
