@@ -28,7 +28,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+         
           <div>
             <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
@@ -40,7 +40,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources */}
+         
           <div>
             <h3 className="font-semibold text-foreground mb-4">Resources</h3>
             <ul className="space-y-2 text-sm">
@@ -52,7 +52,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
+         
           <div>
             <h3 className="font-semibold text-foreground mb-4">Contact Us</h3>
             <div className="space-y-3 text-sm">
@@ -85,7 +85,7 @@ const Footer = () => {
 
         <div className="border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 StrayShield. All rights reserved. Made with ❤️ for India's street dogs.
+            © 2024 StrayShield. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>

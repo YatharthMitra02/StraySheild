@@ -1,7 +1,13 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 import JWT from 'jsonwebtoken'
+import User from "./user.model.js";
 const ngoSchema = new mongoose.Schema({
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: User,
+        required:true
+    },
     organisationName:{
         type: String,
         required:true,
@@ -13,7 +19,7 @@ const ngoSchema = new mongoose.Schema({
     },
     password:{
         type: String,
-        required : [true, "Password is required"],
+        // required : [true, "Password is required"],
         minlength :6
 
     },

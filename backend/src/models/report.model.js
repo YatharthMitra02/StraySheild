@@ -24,11 +24,13 @@ const reportSchema = new mongoose.Schema({
   },
 
   location: {
-    type: String,
-    default:'Point', // points -> that this array is a single location in the map ( a point in the map)
-    coordinates:[Number] // standard GeoJSON format for storing the lon and lat 
-  },
-
+    type: {              
+        type: String,
+        default: 'Point'
+    },
+    coordinates: [Number]
+}
+,
   caseType: {
     type: String,
     enum: ["Injured", "Sick", "Aggressive", "Abandoned", "Other"],
@@ -47,7 +49,7 @@ const reportSchema = new mongoose.Schema({
   },
   status:{
     type:String,
-    enum: ['open', 'In_progress','resolved'],
+    enum: ['open', 'in_progress','resolved'],
     default:'open'
   }
 

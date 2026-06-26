@@ -1,9 +1,10 @@
+import Protect from './protected/Protect.jsx';
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Layout from './components/Layout.jsx'
+import Layout from './components/Layout.jsx'  
 import Home from './components/Home.jsx'
 import REPORT from './REPORT.JSX'
 import Reels from './components/Reels.jsx'
@@ -12,6 +13,8 @@ import {Provider} from 'react-redux'
 import Login from './components/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import NgoForm from './pages/NgoForm.jsx'
+import MapPage from './pages/MapPage.jsx'
+import NgoDirectory from './pages/NgoDirector.jsx'
 
 
 
@@ -27,25 +30,34 @@ const router = createBrowserRouter([
         },
         {
           path:"/login",
-          element:<Login/>,
+          element:<Protect authentication = {fasle}><Login/></Protect>,
         },
          
         {
           path: "/signup",
-          element :<Signup/>
+          element :<Protect authentication={false}><Signup/></Protect>
         },
         {
           path: "/ngoform",
-          element:<NgoForm/>
+          element:<Protect><NgoForm/></Protect>
 
         },
         {
           path:"/report",
-          element:<REPORT/>
+          element:<Protect><REPORT/></Protect>
         },
         {
           path: "/reels",
           element :<Reels/>
+        },
+        {
+          path:"/ngos",
+          element: <NgoDirectory/>
+
+        },
+        {
+          path:"/map",
+          element: <MapPage/>
         }
       ]
     }

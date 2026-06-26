@@ -1,7 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 const NgoForm = () => {
+  const navigate  = useNavigate();
+  const [error,setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     organisationName: "",
     establishedIn: "",
@@ -14,16 +19,30 @@ const NgoForm = () => {
   });
 
   const handleChange = (e) => {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData);
+    
     // Send to backend using axios/fetch
+    setError('');
+    setLoading(true);
+    try {
+      await axios.post('/api/ngo', formData,{withCredentials:true})
+      navigate('/');
+      
+    } catch (error) {
+      setError(error.response?.data?.message || "Something went wrong while resistering the NGO")
+      
+    }
+    finally{
+      setLoading(false);
+    }
   };
 
   return (

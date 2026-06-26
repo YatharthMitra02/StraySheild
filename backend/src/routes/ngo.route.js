@@ -1,9 +1,14 @@
 import { Router } from "express";
-import { loginNgo, logoutNgo, registerNgo } from "../controllers/ngo.controller";
+import { getAllNgos, createNgo } from "../controllers/ngo.controller.js";
+import auth from "../middleware/authorized.middleware.js";
+import roleGuard from "../middleware/roleGuard.middleware.js";
 
 
 const router = Router()
 
-router.route("/register").post(registerNgo)
-router.route("/login").post(loginNgo)
-router.route("logout").post(logoutNgo)
+router.route("/")
+.get(getAllNgos)
+.post(auth, roleGuard("NGO"), createNgo)
+
+export default router;
+

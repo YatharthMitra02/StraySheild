@@ -24,11 +24,24 @@ const Header = () => {
       name:"Report", 
       slug:"/report",
       active:(isActive && userData?.role === "USER" )
-     },{
+     },
+     {
+      name:"Map",
+      slug: "/map",
+      active:true
+     },
+     {
       name:"Reels",
       slug: "/reels",
       active: isActive
-     },{
+     },
+     {
+      name:"Ngos",
+      slug:"/ngos",
+      active: true
+
+     },
+     {
       name:"Create", // create reels
       slug:"/create",
       active: (isActive && userData?.role === "USER")
@@ -48,7 +61,7 @@ const Header = () => {
    <header className='w-[95%] bg-white sticky top-0 z-50 rounded-md p-3 mt-3 mx-auto'>
     <Container>
     <nav className = "flex">
-      <div className='flex gap-7'>
+      <div className='flex gap-2'>
         <Link to="/">
         <img className='h-8 w-8' src="https://cdn-icons-png.freepik.com/512/9848/9848829.png" alt="" />
          </Link>

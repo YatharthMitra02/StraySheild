@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "ngo"],
+      enum: ["User", "NGO"],
       default: "User",
     },
 
@@ -52,7 +52,7 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.methods.isPasswordVaild = async function (password) {
+userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
@@ -61,7 +61,8 @@ userSchema.methods.generateAccessToken = function () {
     {
       _id: this._id,
       email: this.email,
-      password: this.password,
+      role:this.role
+      
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
@@ -69,14 +70,12 @@ userSchema.methods.generateAccessToken = function () {
     },
   );
 };
-// userSchema.methods.generateRefreshToken = function(){
-//     return jwt.sign({
-//         _id : this._id,
-//     },
-// process.env.REFRESH_TOKEN_SECRET,{
-//     expiresIn: process.env.REFRESH_TOKEN_EXPIRY
-// })
-// }
+userSchema.methods.generateRefreshToken = function(){
+     return jwt.sign({
+        _id : this._id,
+    }, process.env.REFRESH_TOKEN_SECRET,{     expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+ })
+ }
 
 const User = mongoose.model("User", userSchema);
 export default User;

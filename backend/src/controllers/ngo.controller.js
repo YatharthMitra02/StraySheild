@@ -1,45 +1,46 @@
-import Ngo from "../models/ngo.model.js";
-import Ngo from "../models/ngo.model.js";
+import Ngo from "../models/ngoProfile.model.js";
+import asynHandler from "../utils/asynHandler.js";
 
 
 // Changes to be made here 
 // 1. add asynhandler at the start of every function
 // 2.validate using the array and soe field
 // 3.check again the code
-// 4.check for the fromtend login page to check which property to add in this 
+// 4.check for the fromtend login page to check which property to add in this
 
 
-export const registerNgo = async (req, res) => {
+
+
+export const createNgo = asynHandler(async (req, res) => {
     const {
         organisationName,
         establishedIn,
-        password,
         address,
         email,
         directorName,
         contactNo,
         serviceIn,
-        membersCount
+        membersCount,
+        
     } = req.body;
 
-    // ✅ Validation
-    if (
-        !organisationName ||
-        !establishedIn ||
-        !password ||
-        !address ||
-        !email ||
-        !directorName ||
-        !contactNo ||
-        !serviceIn ||
-        !membersCount
-    ) {
+    // Validation
+    const required = [
+        organisationName,
+        establishedIn,
+        address,
+        email,
+        directorName,
+        contactNo,
+        serviceIn,
+        membersCount,]
+        if(required.some(fields => !fields)){
         return res.status(400).json({
             message: "All fields are required"
         });
     }
 
-    const existingNgo = await Ngo.findOne({ email: email.toLowerCase() });
+    const existingNgo = await Ngo.findOne({ user: req.user._id  });
 
     if (existingNgo) {
         return res.status(400).json({
@@ -50,93 +51,26 @@ export const registerNgo = async (req, res) => {
     const ngo = await Ngo.create({
         organisationName,
         establishedIn,
-        password,
         address,
         email: email.toLowerCase(),
         directorName,
         contactNo,
         serviceIn,
-        membersCount
+        membersCount,
+        user: req.user._id
     });
+     if(!ngo){
+        throw new Error("There is some problem while creating a NGO")
+     }
+    return res.status(201).json({
+        message: "The NGO has successfully registered",
+        ngo
+    })
+});
 
-    const accessToken = ngo.createAccessToken();
-
-    const ngoData = ngo.toObject();
-    delete ngoData.password;
-
-    return res.status(201)
-        .cookie("accessToken", accessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict"
-        })
-        .json({
-            message: "NGO registered successfully",
-            ngo: ngoData
-        });
-};
-
-export const loginNgo = async (req, res) => {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(400).json({
-            message: "Email and password are required"
-        });
-    }
-
-    const ngo = await Ngo.findOne({ email: email.toLowerCase() });
-
-    if (!ngo) {
-        return res.status(404).json({
-            message: "NGO not found"
-        });
-    }
-
-    const isValid = await ngo.isPasswordValid(password);
-
-    if (!isValid) {
-        return res.status(401).json({
-            message: "Invalid credentials"
-        });
-    }
-
-    const accessToken = ngo.createAccessToken();
-
-    const ngoData = ngo.toObject();
-    delete ngoData.password;
-
-    return res.status(200)
-        .cookie("accessToken", accessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict"
-        })
-        .json({
-            message: "Login successful",
-            ngo: ngoData
-        });
-};
-
-
-export const logoutNgo = async (req, res) => {
-    return res.status(200)
-        .clearCookie("accessToken", {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict"
-        })
-        .json({
-            message: "NGO logged out successfully"
-        });
-};
-
-
-
-
-export{
-    registerNgo,
-    loginNgo,
-    logoutNgo
-    
-}
+export const getAllNgos = asynHandler(async(req,res)=>{
+    const ngos = await Ngo.find()// returns arrray of all the NGOS
+    .select("organisationName establishedIn address email directorName contactNo serviceIn membersCount")
+    .sort({createdAt:-1})// sort them in decreasing order(last-> first position)
+    return res.status(200).json(ngos)
+})
