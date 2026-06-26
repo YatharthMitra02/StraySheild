@@ -38,7 +38,7 @@ External Services (All Free)
 ServicePurposeMongoDB AtlasCloud database (free tier)CloudinaryVideo/image storage for reels (free tier)OpenStreetMapMap tiles (completely free, no key)NominatimGeocoding — address to coordinates (free, no key)
 
 
-📁 Project Structure
+📁 Project Structure:
 
 StraySheild/
 ├── backend/
